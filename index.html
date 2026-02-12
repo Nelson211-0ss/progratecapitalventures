@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prograte Capital Ventures | Empowering Uganda's Women Entrepreneurs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0a5c97',
+                        'primary-light': '#e8f4fc',
+                        secondary: '#e87722',
+                        'secondary-light': '#fdf1e8',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hamburger Menu Styles */
+        .hamburger {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+            display: none;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: #0a5c97;
+            border-radius: 2px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 9px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 18px;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            top: 9px;
+            transform: rotate(135deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            top: 9px;
+            transform: rotate(-135deg);
+        }
+
+        /* Header Styles */
+        .header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            z-index: 50;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header-container.scrolled {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #e87722;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+                z-index: 100;
+            }
+
+            .header-container {
+                height: 70px;
+                padding: 1rem;
+            }
+
+            .mobile-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(8px);
+                transition: all 0.3s ease-in-out;
+                display: none;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                z-index: 90;
+                padding: 2rem 0;
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            .mobile-menu.open {
+                display: flex;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .mobile-menu a {
+                display: block;
+                padding: 1rem 2rem;
+                text-align: center;
+                font-size: 1.2rem;
+                width: 100%;
+                max-width: 300px;
+                margin: 0.5rem 0;
+                transition: all 0.3s;
+                color: #0a5c97;
+                text-decoration: none;
+                border-radius: 8px;
+            }
+
+            .mobile-menu a:hover {
+                background: rgba(10, 92, 151, 0.1);
+                transform: translateX(5px);
+            }
+
+            .mobile-menu a.active {
+                background: rgba(10, 92, 151, 0.1);
+                font-weight: bold;
+            }
+        }
+
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                            linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Enhanced Swiper customization */
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #e87722;
+            transform: scale(1.2);
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        /* Enhanced Card Styles */
+        .stats-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .stats-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Video Section Styles */
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container:hover .play-button {
+            transform: scale(1.1);
+            background-color: rgba(232, 119, 34, 0.9);
+        }
+
+        .play-button {
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive Typography */
+        @media (max-width: 768px) {
+            .text-responsive {
+                font-size: 1.5rem;
+            }
+            
+            .stats-card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Counter Animation */
+        .counter {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main content -->
+    <main class="pt-[80px]">
+        <!-- Hero Section with Slider -->
+        <section class="relative h-screen overflow-hidden">
+            <!-- Background Slider -->
+            <div class="swiper heroSwiper absolute inset-0">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="absolute inset-0">
+                            <img src="back2.jpg" alt="Hero Image 1" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/95 to-primary-dark/95"></div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="absolute inset-0">
+                            <img src="back.jpg" alt="Hero Image 2" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/95 to-primary-dark/95"></div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="absolute inset-0">
+                            <img src="back.jpeg" alt="Hero Image 3" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary/95 to-primary-dark/95"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation -->
+                <div class="swiper-button-next text-white after:text-2xl"></div>
+                <div class="swiper-button-prev text-white after:text-2xl"></div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 h-full flex items-center">
+                <div class="container mx-auto px-4 md:px-8">
+                    <div class="max-w-2xl text-white space-y-6">
+                        <span class="inline-block px-4 py-2 bg-secondary/20 backdrop-blur-sm rounded-full text-secondary font-semibold animate-fadeIn">Transforming Lives Through Investment</span>
+                        <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fadeIn">
+                            Empowering Uganda's Women Entrepreneurs
+                        </h1>
+                        <p class="text-lg md:text-xl text-gray-100 leading-relaxed max-w-xl">
+                            Through innovative micro-investments, we're transforming businesses and lives. Join us in creating sustainable economic growth.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-4">
+                            <a href="apply.html" class="inline-flex items-center justify-center px-8 py-4 bg-secondary text-white rounded-xl font-bold text-lg hover:bg-opacity-90 transform hover:scale-105 transition-all group">
+                                Apply for Investment
+                                <i data-feather="arrow-right" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                            <a href="about.html" class="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-bold text-lg hover:bg-white hover:text-primary transition-all border-2 border-white/20">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="relative mt-8 z-20 px-4 md:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <!-- Businesses Supported -->
+                    <div class="stats-card bg-white rounded-2xl shadow-lg p-4">
+                        <div class="flex items-center justify-center w-10 h-10 bg-primary/10 rounded-xl mb-3">
+                            <i data-feather="briefcase" class="w-5 h-5 text-primary"></i>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-bold text-primary mb-1">
+                            <span class="counter" data-target="400">0</span>+
+                        </div>
+                        <div class="text-gray-600 text-sm">Businesses Supported</div>
+                    </div>
+
+                    <!-- Women-Owned Enterprises -->
+                    <div class="stats-card bg-white rounded-2xl shadow-lg p-4">
+                        <div class="flex items-center justify-center w-10 h-10 bg-secondary/10 rounded-xl mb-3">
+                            <i data-feather="users" class="w-5 h-5 text-secondary"></i>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-bold text-secondary mb-1">
+                            <span class="counter" data-target="81">0</span>%
+                        </div>
+                        <div class="text-gray-600 text-sm">Women-Owned Enterprises</div>
+                    </div>
+
+                    <!-- Monthly Returns -->
+                    <div class="stats-card bg-white rounded-2xl shadow-lg p-4">
+                        <div class="flex items-center justify-center w-10 h-10 bg-green-100 rounded-xl mb-3">
+                            <i data-feather="trending-up" class="w-5 h-5 text-green-600"></i>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-bold text-green-600 mb-1">
+                            <span class="counter" data-target="5">0</span>-<span class="counter" data-target="10">0</span>%
+                        </div>
+                        <div class="text-gray-600 text-sm">Monthly Returns</div>
+                    </div>
+
+                    <!-- Capital Deployed -->
+                    <div class="stats-card bg-white rounded-2xl shadow-lg p-4">
+                        <div class="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-xl mb-3">
+                            <i data-feather="dollar-sign" class="w-5 h-5 text-blue-600"></i>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-bold text-blue-600 mb-1">
+                            UGX <span class="counter" data-target="520000000">0</span>
+                        </div>
+                        <div class="text-gray-600 text-sm">Capital Deployed</div>
+                    </div>
+
+                    <!-- Active Engagement Rate -->
+                    <div class="stats-card bg-white rounded-2xl shadow-lg p-4">
+                        <div class="flex items-center justify-center w-10 h-10 bg-purple-100 rounded-xl mb-3">
+                            <i data-feather="activity" class="w-5 h-5 text-purple-600"></i>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-bold text-purple-600 mb-1">
+                            <span class="counter" data-target="74">0</span>%
+                        </div>
+                        <div class="text-gray-600 text-sm">Active Engagement Rate</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-primary mb-4">The Challenge & Our Solution</h2>
+                <p class="text-xl max-w-2xl mx-auto">In Uganda, over 80% of women-owned businesses operate in the informal sector, systematically excluded from traditional financing despite their proven business success.</p>
+            </div>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-primary-light p-8 rounded-lg shadow-lg">
+                    <div class="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl mb-4 mx-auto">
+                        <i data-feather="lock" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-primary mb-6 text-center">The Challenge</div>
+                    <p class="mb-4">Women entrepreneurs in Uganda's informal sector face significant barriers to accessing capital:</p>
+                    <ul class="space-y-2 list-disc pl-6">
+                        <li>Traditional financial institutions require collateral and formal documentation</li>
+                        <li>Limited property ownership rights make collateral-based lending impossible</li>
+                        <li>Cultural biases restrict access to male-dominated financial networks</li>
+                        <li>Lack of formal business registration prevents access to conventional investments</li>
+                        <li>Existing microfinance solutions impose unsustainable interest rates and rigid repayment terms</li>
+                    </ul>
+                </div>
+                <div class="bg-secondary-light p-8 rounded-lg shadow-lg">
+                    <div class="flex items-center justify-center w-12 h-12 bg-secondary/10 rounded-xl mb-4 mx-auto">
+                        <i data-feather="lightbulb" class="w-6 h-6 text-secondary"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-primary mb-6 text-center">Our Solution</div>
+                    <p class="mb-4">Prograte Capital Ventures bridges this gap through our innovative approach:</p>
+                    <ul class="space-y-2 list-disc pl-6">
+                        <li>Dividend-based micro-investments ranging from $15 to $500</li>
+                        <li>No collateral requirements or formal documentation needed</li>
+                        <li>Flexible payment schedules aligned with business cash flows</li>
+                        <li>Comprehensive business support services including mentorship and training</li>
+                        <li>Evaluation based on cash flow patterns, community reputation, and character</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 px-8 bg-white">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-primary mb-4">How It Works</h2>
+                <p class="text-xl max-w-2xl mx-auto">Our proven four-step process empowers entrepreneurs while delivering consistent returns</p>
+            </div>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold mb-6 mx-auto">1</div>
+                    <div class="flex items-center justify-center w-12 h-12 bg-secondary-light rounded-xl mb-4 mx-auto">
+                        <i data-feather="dollar-sign" class="w-6 h-6 text-secondary"></i>
+                    </div>
+                    <div class="text-xl font-bold text-primary mb-4 text-center">Investment</div>
+                    <p class="text-gray-600 text-center">We provide flexible micro-investments from $15-$500 to women entrepreneurs with demonstrated business success and growth potential.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold mb-6 mx-auto">2</div>
+                    <div class="flex items-center justify-center w-12 h-12 bg-secondary-light rounded-xl mb-4 mx-auto">
+                        <i data-feather="users" class="w-6 h-6 text-secondary"></i>
+                    </div>
+                    <div class="text-xl font-bold text-primary mb-4 text-center">Support</div>
+                    <p class="text-gray-600 text-center">Our comprehensive business development mentorship, financial literacy training, and networking opportunities set entrepreneurs up for success.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold mb-6 mx-auto">3</div>
+                    <div class="flex items-center justify-center w-12 h-12 bg-secondary-light rounded-xl mb-4 mx-auto">
+                        <i data-feather="trending-up" class="w-6 h-6 text-secondary"></i>
+                    </div>
+                    <div class="text-xl font-bold text-primary mb-4 text-center">Growth</div>
+                    <p class="text-gray-600 text-center">Entrepreneurs leverage our capital and support to expand inventory, improve operations, and create jobs within their communities.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-xl font-bold mb-6 mx-auto">4</div>
+                    <div class="flex items-center justify-center w-12 h-12 bg-secondary-light rounded-xl mb-4 mx-auto">
+                        <i data-feather="pie-chart" class="w-6 h-6 text-secondary"></i>
+                    </div>
+                    <div class="text-xl font-bold text-primary mb-4 text-center">Returns</div>
+                    <p class="text-gray-600 text-center">Monthly dividend payments of 5-10% create sustainable returns while entrepreneurs build toward financial independence.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-primary-light py-20 px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-primary mb-4">Entrepreneur Spotlight</h2>
+                <p class="text-xl max-w-2xl mx-auto">Meet the remarkable entrepreneurs transforming their businesses with Prograte's support</p>
+            </div>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="w-full">
+                    <img src="IMG_3172.jpg" alt="Janet Nakato, Market Vendor" class="w-full rounded-lg shadow-lg">
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold text-primary mb-2">Janet Nakato</h3>
+                    <div class="text-xl text-secondary italic mb-6">Fresh Produce Market, Jinja</div>
+                    <p class="mb-6 text-gray-600">Janet operated a small produce stand selling just three vegetable varieties and struggling to maintain consistent inventory. After receiving a $200 investment from Prograte, she expanded her inventory, purchased a refrigerator to reduce spoilage, and now operates one of the most successful produce businesses in her market.</p>
+                    <div class="grid grid-cols-3 gap-4 mb-6">
+                        <div class="text-center p-4 bg-primary-light rounded-lg">
+                            <div class="text-2xl font-bold text-primary">103%</div>
+                            <div class="text-sm text-gray-600">Revenue Growth</div>
+                        </div>
+                        <div class="text-center p-4 bg-primary-light rounded-lg">
+                            <div class="text-2xl font-bold text-primary">2</div>
+                            <div class="text-sm text-gray-600">Jobs Created</div>
+                        </div>
+                        <div class="text-center p-4 bg-primary-light rounded-lg">
+                            <div class="text-2xl font-bold text-primary">8</div>
+                            <div class="text-sm text-gray-600">Product Varieties</div>
+                        </div>
+                    </div>
+                    <div class="italic p-6 bg-primary-light rounded-lg relative mb-6">
+                        <div class="absolute top-[-15px] left-2 text-4xl text-primary opacity-10">"</div>
+                        <p class="text-gray-700">"Before Prograte, I lost so much inventory to spoilage, and banks wouldn't help me because I had no collateral. Now I have a refrigerator, a wider variety of products, and I've hired three people from my community. My children are in better schools, and I'm saving to open a second location."</p>
+                    </div>
+                    <a href="#" class="inline-block bg-primary text-white px-8 py-3 rounded-full font-bold tracking-wide hover:bg-opacity-90 transform hover:scale-105 transition-all">Read Janet's Full Story</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-primary mb-4">Our Investment Approach</h2>
+                <p class="text-xl max-w-2xl mx-auto">A revolutionary model tailored for Uganda's informal sector</p>
+            </div>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-all">
+                    <div class="flex items-center justify-center w-12 h-12 bg-secondary-light rounded-xl mb-4">
+                        <i data-feather="refresh-ccw" class="w-6 h-6 text-secondary"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-4 text-center">Dividend-Based Model</h3>
+                    <p class="text-gray-600">Unlike traditional loans with rigid repayment schedules, our dividend-based model aligns payments with business cash flows. Entrepreneurs make monthly dividend payments of 5-10% of invested capital, creating sustainable returns while accommodating the natural cycles of their businesses.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-all">
+                    <div class="flex items-center justify-center w-12 h-12 bg-secondary-light rounded-xl mb-4">
+                        <i data-feather="check-circle" class="w-6 h-6 text-secondary"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-4 text-center">No Collateral Required</h3>
+                    <p class="text-gray-600">We've eliminated the collateral barrier that prevents women entrepreneurs from accessing traditional financing. Instead, we evaluate businesses through cash flow patterns, community reputation, and character assessments, creating opportunities for entrepreneurs who have been systematically excluded from the financial system.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="relative py-20 px-8">
+            <!-- Background Image -->
+            <div class="absolute inset-0">
+                <img src="images/financial training.png" alt="Background" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/95 to-primary-dark/95"></div>
+            </div>
+            
+            <div class="relative max-w-4xl mx-auto text-center text-white">
+                <h2 class="text-4xl font-bold mb-6">Ready to Get Started?</h2>
+                <p class="text-xl mb-8">Join us in empowering Uganda's women entrepreneurs</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#" class="inline-block bg-secondary text-white px-10 py-4 rounded-full font-bold tracking-wide hover:bg-opacity-90 transform hover:scale-105 transition-all">Apply for Investment</a>
+                    <a href="#" class="inline-block border-2 border-white text-white px-10 py-4 rounded-full font-bold tracking-wide hover:bg-white hover:text-primary transition-all">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="py-20 px-8 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-primary mb-4">Our Story in Motion</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Watch how we're transforming lives and businesses in Uganda's informal sector</p>
+                </div>
+                
+                <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20"></div>
+                    <video 
+                        class="w-full h-full object-cover"
+                        poster="video-poster.jpg"
+                        controls
+                        preload="metadata"
+                    >
+                        <source src="our-story.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <button class="play-button bg-secondary text-white rounded-full p-4 hover:scale-110 transition-transform">
+                            <i data-feather="play" class="w-8 h-8"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:-translate-y-1">
+                        <div class="flex items-center justify-center w-12 h-12 bg-primary-light rounded-xl mb-4">
+                            <i data-feather="users" class="w-6 h-6 text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Real Impact</h3>
+                        <p class="text-gray-600">See how our investments are creating sustainable change in communities</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:-translate-y-1">
+                        <div class="flex items-center justify-center w-12 h-12 bg-secondary-light rounded-xl mb-4">
+                            <i data-feather="trending-up" class="w-6 h-6 text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Success Stories</h3>
+                        <p class="text-gray-600">Hear directly from the entrepreneurs we've empowered</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:-translate-y-1">
+                        <div class="flex items-center justify-center w-12 h-12 bg-primary-light rounded-xl mb-4">
+                            <i data-feather="target" class="w-6 h-6 text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Our Vision</h3>
+                        <p class="text-gray-600">Learn about our mission to revolutionize financial inclusion</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Include footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="./js/utilities.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Load components
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+                
+                // Initialize Feather Icons
+                feather.replace();
+
+                // Initialize mobile menu functionality
+                initializeMobileMenu();
+            })
+            .catch(error => console.error('Error loading header:', error));
+        
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Mobile Menu Functionality
+        function initializeMobileMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            let isMenuOpen = false;
+
+            if (!hamburger || !mobileMenu) {
+                console.warn('Mobile menu elements not found');
+                return;
+            }
+
+            // Toggle menu on hamburger click
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isMenuOpen = !isMenuOpen;
+                hamburger.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+                document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (isMenuOpen && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                    isMenuOpen = false;
+                    hamburger.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Close menu when clicking a link
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    isMenuOpen = false;
+                    hamburger.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Header Scroll Effect
+            const header = document.querySelector('.header-container');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
+
+            // Active Link Highlighting
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize Swiper
+        const heroSwiper = new Swiper('.heroSwiper', {
+            effect: 'fade',
+            speed: 1000,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        // Counter Animation
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target.toLocaleString();
+                }
+            };
+
+            updateCounter();
+        }
+
+        // Intersection Observer for Counter Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const value = parseInt(target.getAttribute('data-target'));
+                    animateCounter(target, value);
+                    observer.unobserve(target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe all counter elements
+        document.querySelectorAll('.counter').forEach(counter => {
+            observer.observe(counter);
+        });
+
+        // Enhanced Video Controls
+        const video = document.querySelector('video');
+        const playButton = document.querySelector('.play-button');
+
+        if (video && playButton) {
+            playButton.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    playButton.style.display = 'none';
+                } else {
+                    video.pause();
+                    playButton.style.display = 'flex';
+                }
+            });
+
+            video.addEventListener('ended', () => {
+                playButton.style.display = 'flex';
+            });
+        }
+    </script>
+</body>
+</html>

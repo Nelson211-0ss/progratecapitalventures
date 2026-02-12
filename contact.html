@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Prograte Capital Ventures</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0a5c97',
+                        'primary-light': '#e8f4fc',
+                        secondary: '#e87722',
+                        'secondary-light': '#fdf1e8',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hamburger Menu Styles */
+        .hamburger {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+            display: none;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: #0a5c97;
+            border-radius: 2px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 9px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 18px;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            top: 9px;
+            transform: rotate(135deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            top: 9px;
+            transform: rotate(-135deg);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+                z-index: 100;
+            }
+
+            .header-container {
+                height: 70px;
+            }
+
+            .mobile-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(8px);
+                transition: 0.3s ease-in-out;
+                display: none;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                z-index: 90;
+                padding: 2rem 0;
+            }
+
+            .mobile-menu.open {
+                display: flex;
+            }
+
+            .mobile-menu a {
+                display: block;
+                padding: 1rem 2rem;
+                text-align: center;
+                font-size: 1.2rem;
+                width: 100%;
+                max-width: 300px;
+                margin: 0.5rem 0;
+                transition: 0.3s;
+                color: #0a5c97;
+                text-decoration: none;
+                border-radius: 8px;
+            }
+
+            .mobile-menu a:hover {
+                background: rgba(10, 92, 151, 0.1);
+            }
+
+            .mobile-menu a.active {
+                background: rgba(10, 92, 151, 0.1);
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Include header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main content -->
+    <main class="pt-0">
+        <!-- Hero Section -->
+        <section class="relative h-[60vh] overflow-hidden">
+            <div class="absolute inset-0">
+                <img src="about2.jpg" alt="Contact Us" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/95 to-primary-dark/95"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 h-full flex items-center">
+                <div class="container mx-auto px-4 md:px-8">
+                    <div class="max-w-2xl text-white space-y-6">
+                        <span class="inline-block px-4 py-2 bg-secondary/20 backdrop-blur-sm rounded-full text-secondary font-semibold animate-fadeIn">Get in Touch</span>
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fadeIn">
+                            Let's Connect and Make an Impact Together
+                        </h1>
+                        <p class="text-lg md:text-xl text-gray-100 leading-relaxed max-w-xl">
+                            Whether you're an entrepreneur seeking investment, a potential partner, or just want to learn more about our mission, we'd love to hear from you.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="py-20 px-8 bg-white">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-primary mb-4">Send Us a Message</h2>
+                    <p class="text-gray-600">We'll get back to you as soon as possible</p>
+                </div>
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                        <textarea id="message" name="message" rows="6" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-all" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="inline-block bg-primary text-white px-8 py-4 rounded-full font-bold tracking-wide hover:bg-opacity-90 transform hover:scale-105 transition-all">
+                            Send Message
+                            <i data-feather="send" class="w-5 h-5 ml-2 inline-block"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Contact Info Section -->
+        <section class="py-20 px-8 bg-primary-light">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-all transform hover:-translate-y-1">
+                        <div class="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl mb-4 mx-auto">
+                            <i data-feather="map-pin" class="w-6 h-6 text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Our Location</h3>
+                        <p class="text-gray-600">Jinja<br>Uganda</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-all transform hover:-translate-y-1">
+                        <div class="flex items-center justify-center w-12 h-12 bg-secondary/10 rounded-xl mb-4 mx-auto">
+                            <i data-feather="phone" class="w-6 h-6 text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Phone</h3>
+                        <p class="text-gray-600">Main: +256 701 093095<br>+Support: +256 775 840985</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-all transform hover:-translate-y-1">
+                        <div class="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl mb-4 mx-auto">
+                            <i data-feather="mail" class="w-6 h-6 text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Email</h3>
+                        <p class="text-gray-600">info@pcv.co.ug<br>support@pcv.co.ug</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Members Section -->
+        <section class="py-20 px-8 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-primary mb-4">Meet Our Team</h2>
+                    <p class="text-gray-600">The people driving Prograte's mission forward</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="Denis Muyingo.jpg" alt="Denis Muyingo" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-4 -mt-14">
+                                <img src="josh.png" alt="Denis Avatar" class="w-16 h-16 rounded-full border-4 border-white shadow-md object-cover">
+                                <div>
+                                    <h3 class="text-xl font-bold text-primary">Denis Muyingo</h3>
+                                    <p class="text-secondary font-medium">Founder & CEO</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mt-4">Leads strategy and partnerships to expand access to inclusive capital across Uganda.</p>
+                            <div class="flex items-center gap-3 mt-5">
+                                <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i data-feather="mail" class="w-4 h-4"></i>
+                                </a>
+                                <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i data-feather="linkedin" class="w-4 h-4"></i>
+                                </a>
+                                <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i data-feather="phone" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="babra.jpg" alt="Babra" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-4 -mt-14">
+                                <img src="angella.jpg" alt="Babra Avatar" class="w-16 h-16 rounded-full border-4 border-white shadow-md object-cover">
+                                <div>
+                                    <h3 class="text-xl font-bold text-primary">Babra Nam</h3>
+                                    <p class="text-secondary font-medium">Operations Lead</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mt-4">Oversees portfolio support, training programs, and day-to-day operations.</p>
+                            <div class="flex items-center gap-3 mt-5">
+                                <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i data-feather="mail" class="w-4 h-4"></i>
+                                </a>
+                                <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i data-feather="linkedin" class="w-4 h-4"></i>
+                                </a>
+                                <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i data-feather="phone" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="jdiobe.jpg" alt="J. Diobe" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-4 -mt-14">
+                                <img src="kuteesa.jpg" alt="J. Diobe Avatar" class="w-16 h-16 rounded-full border-4 border-white shadow-md object-cover">
+                                <div>
+                                    <h3 class="text-xl font-bold text-primary">James Diobe</h3>
+                                    <p class="text-secondary font-medium">Investment Manager</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mt-4">Leads deal sourcing, due diligence, and performance monitoring for our fund.</p>
+                            <div class="flex items-center gap-3 mt-5">
+                                <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i data-feather="mail" class="w-4 h-4"></i>
+                                </a>
+                                <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i data-feather="linkedin" class="w-4 h-4"></i>
+                                </a>
+                                <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i data-feather="phone" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Include footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Load header and footer
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+                
+                // Initialize Feather Icons
+                feather.replace();
+
+                // Hamburger Menu Toggle
+                const hamburger = document.querySelector('.hamburger');
+                const mobileMenu = document.querySelector('.mobile-menu');
+                let isMenuOpen = false;
+
+                hamburger.addEventListener('click', () => {
+                    isMenuOpen = !isMenuOpen;
+                    hamburger.classList.toggle('open');
+                    mobileMenu.classList.toggle('open');
+                    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (isMenuOpen && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                        isMenuOpen = false;
+                        hamburger.classList.remove('open');
+                        mobileMenu.classList.remove('open');
+                        document.body.style.overflow = '';
+                    }
+                });
+
+                // Close mobile menu when clicking a link
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        isMenuOpen = false;
+                        hamburger.classList.remove('open');
+                        mobileMenu.classList.remove('open');
+                        document.body.style.overflow = '';
+                    });
+                });
+
+                // Header Scroll Effect
+                const header = document.querySelector('.header-container');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+
+                // Active Link Highlighting
+                const currentPath = window.location.pathname;
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === currentPath) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+    </script>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+        }
+    </style>
+</body>
+</html>
