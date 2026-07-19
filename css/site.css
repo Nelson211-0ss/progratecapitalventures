@@ -1201,20 +1201,24 @@ p {
         transform: translateY(0);
     }
 
-    .mobile-menu a {
-        display: block;
+    /* Links are centred, so the old hover shift (padding-left) would slide them
+       off-centre — the colour change carries the state instead. */
+    .mobile-menu a:not(.btn) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         padding: 1rem 0;
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.0625rem;
         font-weight: 600;
         color: var(--ink);
         border-bottom: 1px solid var(--line);
-        transition: padding-left 0.25s var(--ease), color 0.25s var(--ease);
+        transition: color 0.25s var(--ease);
     }
 
-    .mobile-menu a:hover,
-    .mobile-menu a.active {
-        padding-left: 0.5rem;
+    .mobile-menu a:not(.btn):hover,
+    .mobile-menu a:not(.btn).active {
         color: var(--brand);
     }
 
@@ -1223,15 +1227,18 @@ p {
         display: none;
     }
 
+    /* Excluded from the rule above so it keeps .btn's own display, padding and
+       brand fill — otherwise it flattens into a left-aligned orange bar. */
     .mobile-menu .btn {
+        display: flex;
         margin-top: 1.5rem;
         border-bottom: none;
-        justify-content: center;
+        background: var(--brand);
         color: #fff;
     }
 
     .mobile-menu .btn:hover {
-        padding-left: 1.5rem;
+        background: var(--brand-hover);
         color: #fff;
     }
 
