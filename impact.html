@@ -4,401 +4,255 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Impact | Prograte Capital Ventures</title>
+    <meta name="description" content="400+ businesses supported across Uganda — the numbers, the areas of impact, and where our capital goes.">
     <link rel="icon" href="Blue%20Logo.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0a5c97',
-                        'primary-light': '#e8f4fc',
-                        secondary: '#e87722',
-                        'secondary-light': '#fdf1e8',
+                        brand: '#fe5c00',
+                        'brand-dark': '#e65300',
+                        'brand-light': '#ff7d33',
+                        'brand-tint': '#ffe5d6',
+                        ink: '#14151a',
+                        body: '#5e6673',
+                        muted: '#76808f',
+                        line: '#e6e8ea',
+                        surface: '#fafafa',
+                        dark: '#0b0e11',
+                        'dark-2': '#1e2026',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-    <style>
-        .header-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 50;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(8px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .header-container.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .nav-link {
-            position: relative;
-            padding: 0.5rem 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: #e87722;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        /* Hamburger Menu Styles */
-        .hamburger {
-            width: 30px;
-            height: 20px;
-            position: relative;
-            cursor: pointer;
-            display: none;
-        }
-
-        .hamburger span {
-            display: block;
-            position: absolute;
-            height: 2px;
-            width: 100%;
-            background: #0a5c97;
-            border-radius: 2px;
-            opacity: 1;
-            left: 0;
-            transform: rotate(0deg);
-            transition: .25s ease-in-out;
-        }
-
-        .hamburger span:nth-child(1) {
-            top: 0px;
-        }
-
-        .hamburger span:nth-child(2) {
-            top: 9px;
-        }
-
-        .hamburger span:nth-child(3) {
-            top: 18px;
-        }
-
-        .hamburger.open span:nth-child(1) {
-            top: 9px;
-            transform: rotate(135deg);
-        }
-
-        .hamburger.open span:nth-child(2) {
-            opacity: 0;
-            left: -60px;
-        }
-
-        .hamburger.open span:nth-child(3) {
-            top: 9px;
-            transform: rotate(-135deg);
-        }
-
-        @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-                z-index: 100;
-            }
-
-            .header-container {
-                height: 70px;
-            }
-
-            .mobile-menu {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(8px);
-                transition: 0.3s ease-in-out;
-                display: none;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                z-index: 90;
-                padding: 2rem 0;
-            }
-
-            .mobile-menu.open {
-                display: flex;
-            }
-
-            .mobile-menu a {
-                display: block;
-                padding: 1rem 2rem;
-                text-align: center;
-                font-size: 1.2rem;
-                width: 100%;
-                max-width: 300px;
-                margin: 0.5rem 0;
-                transition: 0.3s;
-                color: #0a5c97;
-                text-decoration: none;
-                border-radius: 8px;
-            }
-
-            .mobile-menu a:hover {
-                background: rgba(10, 92, 151, 0.1);
-            }
-
-            .mobile-menu a.active {
-                background: rgba(10, 92, 151, 0.1);
-                font-weight: bold;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/site.css">
+    <script src="https://unpkg.com/feather-icons" defer></script>
+    <script src="js/site.js" defer></script>
 </head>
-<body class="bg-gray-100 text-gray-800 leading-relaxed">
-    <!-- Include header -->
+<body>
     <div id="header-placeholder"></div>
-    
-    <main class="pt-[140px] md:pt-[30px] pb-16">
-        <!-- Hero Section -->
-        <section class="relative mb-16 overflow-hidden">
-            <div class="absolute inset-0">
-                <img src="IMG_3172.jpg" alt="" class="w-full h-full object-cover" onerror="this.style.display='none'">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary-dark/90"></div>
-            </div>
 
-            <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center text-white">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Our Impact</h1>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">Transforming lives and empowering women entrepreneurs across Uganda through sustainable investment and support.</p>
-                
-                <!-- Quick Stats -->
-                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                        <div class="text-3xl font-bold text-secondary">400+</div>
-                        <div class="text-sm text-gray-200">Entrepreneurs</div>
+    <main class="pt-16 lg:pt-20">
+        <!-- ================= Hero ================= -->
+        <section class="hero hero--compact hero--overlap">
+            <div class="hero__bg"><img src="IMG_3172.jpg" alt=""></div>
+            <div class="hero__scrim"></div>
+            <div class="hero__content shell">
+                <div class="max-w-3xl">
+                    <span class="eyebrow" data-reveal>Our impact</span>
+                    <h1 class="mt-5" data-reveal style="--d:100ms">
+                        400 businesses, three districts, one model that holds
+                    </h1>
+                    <p class="mt-6 max-w-2xl" data-reveal style="--d:200ms">
+                        What sustained investment in Uganda's informal sector looks like when it's
+                        measured properly — and what it produces.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overlapping strip, matching the contact page pattern. -->
+        <section class="shell -mt-10 relative z-10">
+            <div class="stat-strip stat-strip--4 shadow-[0_24px_60px_-40px_rgba(11,14,17,0.5)]" data-stagger="80">
+                <div class="stat !p-7" data-reveal>
+                    <div class="stat__value"><span class="counter" data-target="400">0</span>+</div>
+                    <div class="stat__label">Entrepreneurs backed</div>
+                </div>
+                <div class="stat !p-7" data-reveal>
+                    <div class="stat__value"><span class="counter" data-target="3">0</span></div>
+                    <div class="stat__label">Districts covered</div>
+                </div>
+                <div class="stat !p-7" data-reveal>
+                    <div class="stat__value"><span class="counter" data-target="95">0</span>%</div>
+                    <div class="stat__label">Repayment success rate</div>
+                </div>
+                <div class="stat !p-7" data-reveal>
+                    <div class="stat__value"><span class="counter" data-target="2">0</span>+</div>
+                    <div class="stat__label">Years of operation</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= Portfolio numbers ================= -->
+        <section class="section">
+            <div class="shell">
+                <div class="section-head section-head--split">
+                    <div data-reveal>
+                        <span class="eyebrow">By the numbers</span>
+                        <h2>Portfolio performance</h2>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                        <div class="text-3xl font-bold text-secondary">3</div>
-                        <div class="text-sm text-gray-200">Locations</div>
+                    <p data-reveal style="--d:120ms">
+                        Figures reflect cumulative activity across Jinja, Matugga–Kampala, and Busia
+                        since inception.
+                    </p>
+                </div>
+
+                <!-- "Businesses supported" lives in the hero strip above; repeating
+                     it here would give the page two 400+ tiles in a row. -->
+                <div class="stat-strip" data-stagger="80">
+                    <div class="stat" data-reveal>
+                        <div class="stat__icon"><i data-feather="dollar-sign"></i></div>
+                        <div class="stat__value">UGX <span class="counter" data-target="520">0</span>M</div>
+                        <div class="stat__label">Capital deployed</div>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                        <div class="text-3xl font-bold text-secondary">95%</div>
-                        <div class="text-sm text-gray-200">Success Rate</div>
+                    <div class="stat" data-reveal>
+                        <div class="stat__icon"><i data-feather="trending-up"></i></div>
+                        <div class="stat__value">5–<span class="counter" data-target="10">0</span>%</div>
+                        <div class="stat__label">Monthly dividend returns</div>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                        <div class="text-3xl font-bold text-secondary">2+</div>
-                        <div class="text-sm text-gray-200">Years Impact</div>
+                    <div class="stat" data-reveal>
+                        <div class="stat__icon"><i data-feather="unlock"></i></div>
+                        <div class="stat__value"><span class="counter" data-target="26">0</span>%</div>
+                        <div class="stat__label">Reached financial independence</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Impact Statistics -->
-        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
-                    <div class="text-4xl font-bold text-primary mb-2">
-                        <span data-purecounter-start="0" data-purecounter-end="400" data-purecounter-duration="2" class="purecounter">0</span>+
+        <!-- ================= Areas of impact ================= -->
+        <section class="section section--muted">
+            <div class="shell">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                    <div data-reveal>
+                        <span class="eyebrow">Areas of impact</span>
+                        <h2 class="text-[clamp(1.75rem,3.2vw,2.5rem)] font-bold leading-tight mt-4 mb-6">
+                            Four ways a single investment compounds
+                        </h2>
+                        <p class="text-[1.0625rem] leading-relaxed mb-8">
+                            Capital placed in a market business rarely stops at the business. It moves through
+                            households, employees, suppliers, and the wider local economy.
+                        </p>
+                        <div class="media aspect-[4/3]">
+                            <img src="images/IMG_3202.jpg" alt="Entrepreneurs in a Prograte training session">
+                        </div>
                     </div>
-                    <div class="text-gray-600">Businesses Supported</div>
-                </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
-                    <div class="text-4xl font-bold text-primary mb-2">UGX
-                        <span data-purecounter-start="0" data-purecounter-end="500" data-purecounter-duration="2" class="purecounter">0</span>M
+                    <div data-stagger="100">
+                        <div class="feature" data-reveal>
+                            <span class="icon-tile"><i data-feather="dollar-sign"></i></span>
+                            <div>
+                                <h3>Economic empowerment</h3>
+                                <p>Access to capital and financial literacy training so women entrepreneurs can grow their businesses on their own terms, sustainably.</p>
+                            </div>
+                        </div>
+                        <div class="feature" data-reveal>
+                            <span class="icon-tile"><i data-feather="briefcase"></i></span>
+                            <div>
+                                <h3>Job creation</h3>
+                                <p>Supporting businesses that hire locally — with a strong bias toward employment opportunities for other women in the community.</p>
+                            </div>
+                        </div>
+                        <div class="feature" data-reveal>
+                            <span class="icon-tile"><i data-feather="book-open"></i></span>
+                            <div>
+                                <h3>Skills development</h3>
+                                <p>Training and mentorship that build lasting business management capability, not one-off cash injections.</p>
+                            </div>
+                        </div>
+                        <div class="feature" data-reveal>
+                            <span class="icon-tile"><i data-feather="users"></i></span>
+                            <div>
+                                <h3>Community development</h3>
+                                <p>Increased trading activity, stronger supplier relationships, and household income that stays in the local economy.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-gray-600">Capital Deployed</div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
-                    <div class="text-4xl font-bold text-primary mb-2">
-                        <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="2" class="purecounter">0</span>%
-                    </div>
-                    <div class="text-gray-600">Monthly Returns</div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center transform hover:scale-105 transition-transform">
-                    <div class="text-4xl font-bold text-primary mb-2">
-                        <span data-purecounter-start="0" data-purecounter-end="26" data-purecounter-duration="2" class="purecounter">0</span>%
-                    </div>
-                    <div class="text-gray-600">Financial Independence Rate</div>
                 </div>
             </div>
         </section>
 
-        <!-- Impact Areas -->
-        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-            <h2 class="text-3xl font-bold text-primary text-center mb-12">Areas of Impact</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center text-primary">
-                            <i data-feather="dollar-sign" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 ml-4">Economic Empowerment</h3>
+        <!-- ================= Stories ================= -->
+        <section class="section">
+            <div class="shell">
+                <div class="section-head section-head--split">
+                    <div data-reveal>
+                        <span class="eyebrow">Stories</span>
+                        <h2>The businesses behind the numbers</h2>
                     </div>
-                    <p class="text-gray-600">Providing access to capital and financial literacy training to help women entrepreneurs grow their businesses sustainably.</p>
+                    <p data-reveal style="--d:120ms">
+                        Three entrepreneurs, three sectors, three very different uses of the same
+                        investment model.
+                    </p>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center text-primary">
-                            <i data-feather="briefcase" class="w-6 h-6"></i>
+                <div class="grid md:grid-cols-3 gap-6" data-stagger="110">
+                    <article data-reveal>
+                        <div class="media aspect-[4/3]">
+                            <img src="images/angella tailor.png" alt="Sarah's fashion boutique">
+                            <div class="media__caption">
+                                <h3>80% growth</h3>
+                                <p>Tailoring shop to fashion label</p>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 ml-4">Job Creation</h3>
-                    </div>
-                    <p class="text-gray-600">Supporting businesses that create employment opportunities for local communities, particularly focusing on women employment.</p>
+                        <h3 class="text-lg font-bold mt-5">Sarah's Fashion Boutique</h3>
+                        <p class="text-sm mt-2 leading-relaxed">A second machine and fabric stock turned a one-woman tailoring shop into a business with two employees.</p>
+                    </article>
+                    <article data-reveal>
+                        <div class="media aspect-[4/3]">
+                            <img src="images/image tomatoes.jpg" alt="Grace's restaurant">
+                            <div class="media__caption">
+                                <h3>120% growth</h3>
+                                <p>One eatery to three locations</p>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold mt-5">Grace's Restaurant</h3>
+                        <p class="text-sm mt-2 leading-relaxed">Staged investment funded a central kitchen, letting Grace open two further locations in eighteen months.</p>
+                    </article>
+                    <article data-reveal>
+                        <div class="media aspect-[4/3]">
+                            <img src="images/barbra saloon.png" alt="Mary's beauty salon">
+                            <div class="media__caption">
+                                <h3>90% growth</h3>
+                                <p>Home salon to high street</p>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold mt-5">Mary's Beauty Salon</h3>
+                        <p class="text-sm mt-2 leading-relaxed">Equipment finance plus pricing training moved a home-based salon onto the high street.</p>
+                    </article>
                 </div>
+            </div>
+        </section>
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center text-primary">
-                            <i data-feather="book-open" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 ml-4">Skills Development</h3>
+        <!-- ================= CTA ================= -->
+        <section class="hero">
+            <div class="hero__bg"><img src="images/IMG_3228.jpg" alt=""></div>
+            <div class="hero__scrim"></div>
+            <div class="hero__content shell py-20 md:py-24">
+                <div class="grid lg:grid-cols-[minmax(0,1fr)_auto] gap-10 lg:gap-16 items-center">
+                    <div data-reveal>
+                        <span class="eyebrow">Be part of it</span>
+                        <h2 class="text-white text-[clamp(1.75rem,3.4vw,2.625rem)] font-bold leading-tight mt-4">
+                            Add your business to these numbers
+                        </h2>
+                        <p class="mt-5 max-w-xl">
+                            Applications take about ten minutes, and every one is reviewed by an
+                            officer in your district.
+                        </p>
                     </div>
-                    <p class="text-gray-600">Providing business training and mentorship to enhance entrepreneurial capabilities and business management skills.</p>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center text-primary">
-                            <i data-feather="users" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 ml-4">Community Development</h3>
+                    <div class="flex flex-wrap gap-3" data-reveal style="--d:140ms">
+                        <a href="apply.html" class="btn btn--primary">
+                            Apply for Investment
+                            <i data-feather="arrow-right"></i>
+                        </a>
+                        <a href="contact.html" class="btn btn--ghost">Contact us</a>
                     </div>
-                    <p class="text-gray-600">Fostering economic growth in local communities through increased business activity and employment opportunities.</p>
                 </div>
             </div>
         </section>
     </main>
 
     <div id="footer-placeholder"></div>
-
-    <script>
-        // Load header and footer
-        fetch('header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-                
-                // Initialize Feather Icons
-                feather.replace();
-
-                // Hamburger Menu Toggle
-                const hamburger = document.querySelector('.hamburger');
-                const mobileMenu = document.querySelector('.mobile-menu');
-                let isMenuOpen = false;
-
-                hamburger.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    isMenuOpen = !isMenuOpen;
-                    hamburger.classList.toggle('open');
-                    mobileMenu.classList.toggle('open');
-                    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-                });
-
-                // Close mobile menu when clicking outside
-                document.addEventListener('click', (e) => {
-                    if (isMenuOpen && !mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
-                        isMenuOpen = false;
-                        hamburger.classList.remove('open');
-                        mobileMenu.classList.remove('open');
-                        document.body.style.overflow = '';
-                    }
-                });
-
-                // Close mobile menu when clicking a link
-                mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        isMenuOpen = false;
-                        hamburger.classList.remove('open');
-                        mobileMenu.classList.remove('open');
-                        document.body.style.overflow = '';
-                    });
-                });
-
-                // Header Scroll Effect
-                const header = document.querySelector('.header-container');
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 50) {
-                        header.classList.add('scrolled');
-                    } else {
-                        header.classList.remove('scrolled');
-                    }
-                });
-
-                // Active Link Highlighting
-                const currentPath = window.location.pathname;
-                const navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
-                    if (link.getAttribute('href') === currentPath) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            });
-
-        // Initialize PureCounter
-        new PureCounter({
-            selector: '.purecounter',
-            once: true,
-            repeat: false,
-            decimals: 0,
-            legacy: true,
-            duration: 2,
-            useEasing: true,
-            useGrouping: true,
-            separator: ',',
-            decimal: '.',
-        });
-
-        // Initialize Intersection Observer for progress bars
-        const progressBars = document.querySelectorAll('.progress-bar');
-        
-        const progressObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bar = entry.target;
-                    const width = bar.getAttribute('data-width');
-                    setTimeout(() => {
-                        bar.style.width = width + '%';
-                    }, 200);
-                    progressObserver.unobserve(bar);
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        progressBars.forEach(bar => {
-            progressObserver.observe(bar);
-        });
-
-        // Initialize Feather Icons
-        feather.replace();
-    </script>
 </body>
 </html>
