@@ -751,12 +751,47 @@ p {
 
 /* ---------- Team --------------------------------------------------------- */
 
+/* A bordered card rather than a bare photo: the portraits vary in crop and
+   lighting, and a shared frame is what makes five of them read as one row. */
+.person {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.3s var(--ease), box-shadow 0.35s var(--ease),
+                transform 0.35s var(--ease);
+}
+
+.person:hover {
+    border-color: var(--line-strong);
+    box-shadow: 0 22px 45px -30px rgba(11, 14, 17, 0.45);
+    transform: translateY(-4px);
+}
+
+/* Brand rule that wipes across the top edge, matching .card--wipe. */
 .person figure {
     position: relative;
     overflow: hidden;
-    border-radius: var(--radius);
     aspect-ratio: 4 / 5;
     background: var(--surface-sunken);
+}
+
+.person figure::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: var(--brand);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s var(--ease);
+    z-index: 1;
+}
+
+.person:hover figure::after {
+    transform: scaleX(1);
 }
 
 .person img {
@@ -772,32 +807,41 @@ p {
     filter: grayscale(0);
 }
 
+.person__body {
+    padding: 1.125rem 1.125rem 1.25rem;
+    border-top: 1px solid var(--line);
+    transition: border-color 0.3s var(--ease);
+}
+
+.person:hover .person__body {
+    border-color: var(--brand-tint);
+}
+
+.person__name {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.person__role {
+    font-size: 0.8125rem;
+    color: var(--brand);
+    font-weight: 500;
+    margin-top: 0.2rem;
+}
+
+/* Social links moved out of the photo and into the card body: the old hover
+   overlay was invisible on touch, and these are the card's only actions. */
 .person__social {
-    position: absolute;
-    inset: auto 0.75rem 0.75rem auto;
     display: flex;
-    gap: 0.375rem;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--line);
 }
 
-.person:hover .person__social {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@media (hover: none) {
-    .person__social {
-        opacity: 1;
-        transform: none;
-    }
-
-    .person img {
-        filter: none;
-    }
-}
-
+/* Feather is a stroke-only set — there is no filled variant of these glyphs.
+   The "solid" weight comes from the chip: a filled tile with the icon knocked
+   out of it, going full brand on hover. */
 .person__social a {
     display: inline-flex;
     align-items: center;
@@ -805,14 +849,16 @@ p {
     width: 2rem;
     height: 2rem;
     border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.92);
-    color: var(--ink);
-    transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
+    background: var(--brand-tint);
+    color: var(--brand);
+    transition: background-color 0.25s var(--ease), color 0.25s var(--ease),
+                transform 0.25s var(--ease);
 }
 
 .person__social a:hover {
     background: var(--brand);
     color: #fff;
+    transform: translateY(-2px);
 }
 
 .person__social svg {
@@ -820,17 +866,11 @@ p {
     height: 0.9375rem;
 }
 
-.person__name {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-top: 1rem;
-}
-
-.person__role {
-    font-size: 0.875rem;
-    color: var(--brand);
-    font-weight: 500;
-    margin-top: 0.15rem;
+/* Touch devices get no hover, so the grayscale treatment would be permanent. */
+@media (hover: none) {
+    .person img {
+        filter: none;
+    }
 }
 
 /* ---------- Lists -------------------------------------------------------- */
@@ -1247,4 +1287,52 @@ p {
     border-color: var(--brand);
     color: #fff;
     transform: translateY(-2px);
+}
+
+/* ---------- Phones: centred content --------------------------------------
+   Every band collapses to a single column on a phone, where the left-aligned
+   desktop rhythm reads as content stuck to one edge. Centring the copy makes
+   the narrow layout look deliberate. Desktop is untouched. */
+
+@media (max-width: 767px) {
+    main,
+    .footer {
+        text-align: center;
+    }
+
+    /* Text-align alone leaves width-capped blocks hugging the left gutter —
+       they need auto margins to actually sit in the middle. */
+    main [class*='max-w-'],
+    .footer [class*='max-w-'],
+    .section-head,
+    .section-head--split > * {
+        margin-inline: auto;
+    }
+
+    /* Inline-flex bits (.eyebrow, .btn, .icon-tile) follow text-align, but real
+       flex rows — button groups, icon+copy lists, social links — need their
+       main axis re-centred. Columns are already centred by align-items below. */
+    main .flex:not(.flex-col),
+    .footer .flex:not(.flex-col) {
+        justify-content: center;
+    }
+
+    /* These set display:flex in CSS rather than via a utility class, so the
+       rule above misses them. */
+    .feature {
+        align-items: center;
+    }
+
+    .list-check li,
+    .person__social {
+        justify-content: center;
+    }
+
+    /* Form controls stay left-aligned — centred input text is hard to scan and
+       fights the placeholder. Labels follow the rest of the page. */
+    .field input,
+    .field select,
+    .field textarea {
+        text-align: left;
+    }
 }
